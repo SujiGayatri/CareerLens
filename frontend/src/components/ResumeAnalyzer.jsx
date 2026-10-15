@@ -100,7 +100,7 @@ function ResumeAnalyzer({ provider, apiKey, onBack }) {
   return (
 
     <main className="analyzer-page">
-      {loading && <Loading />}
+      {loading && <Loading title="Analyzing Resume..."/>}
 
       <div className="analyzer-container">
 

@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 import '../css/AIProviderSetup.css';
-
+import Loading from './Loading';
 const providers = [
   {
     id: 'groq',
@@ -90,6 +90,11 @@ function AIProviderSetup({ onConnected }) {
 
   return (
     <main className="setup-page">
+      {loading && (
+  <Loading
+    title="Verifying AI connection..."
+  />
+)}
       <div className="setup-container">
 
         <div className="setup-header">
