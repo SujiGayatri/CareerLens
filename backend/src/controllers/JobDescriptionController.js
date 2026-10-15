@@ -32,10 +32,10 @@ export const processJobDescription = async (req, res) => {
       description: processedText,
     });
 
-    console.log(
-      "Job description saved to MongoDB:",
-      savedJobDescription._id
-    );
+    // console.log(
+    //   "Job description saved to MongoDB:",
+    //   savedJobDescription._id
+    // );
 
     // 5. Return successful response
     return res.status(200).json({

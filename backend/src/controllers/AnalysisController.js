@@ -51,12 +51,12 @@ const generateAndParseAnalysis = async ({
     let aiResponse;
 
     try {
-      console.log("System prompt length:", systemPrompt.length);
-console.log("User prompt length:", userPrompt.length);
-console.log(
-  "Approx input characters:",
-  systemPrompt.length + userPrompt.length
-);
+//       console.log("System prompt length:", systemPrompt.length);
+// console.log("User prompt length:", userPrompt.length);
+// console.log(
+//   "Approx input characters:",
+//   systemPrompt.length + userPrompt.length
+// );
       aiResponse = await generateAIResponse({
   provider,
   apiKey,
@@ -324,18 +324,18 @@ export const testResumeAnalysis = async (req, res) => {
       }
     );
 
-    console.log('===== VECTOR RETRIEVAL DEBUG =====');
-console.log('resumeId:', resumeId);
-console.log('JD embedding length:', jdEmbedding?.length);
-console.log(
-  'Relevant chunks count:',
-  relevantChunks?.length
-);
-console.log(
-  'Relevant chunks:',
-  relevantChunks
-);
-console.log('==================================');
+//     console.log('===== VECTOR RETRIEVAL DEBUG =====');
+// console.log('resumeId:', resumeId);
+// console.log('JD embedding length:', jdEmbedding?.length);
+// console.log(
+//   'Relevant chunks count:',
+//   relevantChunks?.length
+// );
+// console.log(
+//   'Relevant chunks:',
+//   relevantChunks
+// );
+// console.log('==================================');
 
     if (relevantChunks.length === 0) {
       return res.status(404).json({
@@ -365,7 +365,7 @@ console.log('==================================');
   analysisResult.requirements
 );
 
-console.log("Calculated match score:", matchScore);
+// console.log("Calculated match score:", matchScore);
 
     // 6. Return everything useful for testing
     return res.status(200).json({
@@ -493,7 +493,7 @@ export const analyzeResume = async (req, res) => {
   analysisResult.requirements
 );
 
-console.log("Calculated match score:", matchScore);
+// console.log("Calculated match score:", matchScore);
 
     // 9. Save/update analysis
    const analysis = await Analysis.findOneAndUpdate(

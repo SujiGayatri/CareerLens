@@ -16,13 +16,13 @@ export const uploadResume = async (req, res) => {
       });
     }
 
-    console.log("Resume received:", req.file.originalname);
-    console.log("File size:", req.file.size);
+    // console.log("Resume received:", req.file.originalname);
+    // console.log("File size:", req.file.size);
 
     // 2. Extract text from PDF
     const extractedText = await parseResumePDF(req.file.buffer);
 
-    console.log("Resume text extracted successfully.");
+    // console.log("Resume text extracted successfully.");
 
     // 3. Save resume to MongoDB
     const resume = await Resume.create({
@@ -32,12 +32,12 @@ export const uploadResume = async (req, res) => {
       status: "processed",
     });
 
-    console.log("Resume saved to MongoDB:", resume._id);
+    // console.log("Resume saved to MongoDB:", resume._id);
 
     // 4. Split resume text into chunks
     const chunks = chunkResumeText(extractedText);
 
-    console.log(`Resume divided into ${chunks.length} chunks.`);
+    // console.log(`Resume divided into ${chunks.length} chunks.`);
 
     // 5. Extract chunk text
     const chunkTexts = chunks.map((chunk) => chunk.text);
@@ -45,9 +45,9 @@ export const uploadResume = async (req, res) => {
     // 6. Generate embeddings for all chunks
     const embeddings = await generateEmbeddings(chunkTexts);
 
-    console.log(
-      `Generated ${embeddings.length} embeddings.`
-    );
+    // console.log(
+    //   `Generated ${embeddings.length} embeddings.`
+    // );
 
     // 7. Combine chunks + embeddings
     const chunkDocuments = chunks.map((chunk, index) => ({
@@ -61,9 +61,9 @@ export const uploadResume = async (req, res) => {
     // 8. Save all chunks + embeddings
     await ResumeChunk.insertMany(chunkDocuments);
 
-    console.log(
-      `${chunkDocuments.length} resume chunks saved to MongoDB.`
-    );
+    // console.log(
+    //   `${chunkDocuments.length} resume chunks saved to MongoDB.`
+    // );
 
     // 9. Return successful response
     return res.status(200).json({

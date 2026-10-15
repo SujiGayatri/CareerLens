@@ -6,179 +6,102 @@ import JobDescription from './JobDescription';
 import '../css/ResumeAnalyzer.css';
 import { uploadResume, createJobDescription, analyzeResume } from '../services/api';
 import AnalysisResults from './AnalysisResults';
+import Loading from './Loading';
 
-function ResumeAnalyzer({ provider,apiKey, onBack }) {
+function ResumeAnalyzer({ provider, apiKey, onBack }) {
   const [resume, setResume] = useState(null);
   const [jobDescription, setJobDescription] = useState('');
   const [resumeId, setResumeId] = useState(null);
-const [jobDescriptionId, setJobDescriptionId] = useState(null);
-const [loading, setLoading] = useState(false);
-const [error, setError] = useState('');
+  const [jobDescriptionId, setJobDescriptionId] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [analysis, setAnalysis] = useState(null);
 
   const canAnalyze =
     resume !== null && jobDescription.trim().length > 30;
+  const handleAnalyze = async () => {
+    if (!canAnalyze || loading) return;
 
-//  const handleAnalyze = async () => {
-//   if (!canAnalyze || loading) return;
+    setLoading(true);
+    setError('');
 
-//   setLoading(true);
-//   setError('');
+    try {
+      let currentResumeId = resumeId;
+      let currentJobDescriptionId = jobDescriptionId;
 
-//   try {
-//     // 1. Upload and process resume
-//     // const resumeResult = await uploadResume(resume);
+      // Upload resume only if it hasn't been processed yet
+      if (!currentResumeId) {
+        const resumeResult = await uploadResume(resume);
 
-//     // const uploadedResumeId =
-//     //   resumeResult.data.resumeId;
-//     setResumeId(uploadedResumeId);
+        currentResumeId = resumeResult.data.resumeId;
+        setResumeId(currentResumeId);
 
-//     console.log(
-//       'Resume processed:',
-//       resumeResult.data
-//     );
+        // console.log('Resume processed:', resumeResult.data);
+      }
 
-//     // 2. Process job description
-//     // const jobDescriptionResult =
-//     //   await createJobDescription({
-//     //     jobDescription: jobDescription.trim(),
-//     //   });
+      // Process job description only if it hasn't been processed yet
+      if (!currentJobDescriptionId) {
+        const jobDescriptionResult = await createJobDescription({
+          jobDescription: jobDescription.trim(),
+        });
 
-//     // const uploadedJobDescriptionId =
-//     //   jobDescriptionResult.data.jobDescriptionId;
+        currentJobDescriptionId =
+          jobDescriptionResult.data.jobDescriptionId;
 
-//     setJobDescriptionId(uploadedJobDescriptionId);
+        setJobDescriptionId(currentJobDescriptionId);
 
-//     console.log(
-//       'Job description processed:',
-//       jobDescriptionResult.data
-//     );
-//     console.log('===== FINAL ANALYSIS REQUEST =====');
-// console.log('Fresh resumeId:', uploadedResumeId);
-// console.log(
-//   'Fresh jobDescriptionId:',
-//   uploadedJobDescriptionId
-// );
-// console.log('Provider:', provider);
-// console.log('==================================');
+        // console.log('Job description processed:',jobDescriptionResult.data);
+      }
 
-//     // 3. Run AI analysis
-//     const analysisResponse = await analyzeResume({
-//       resumeId,
-//       jobDescriptionId,
-//       provider,
-//       apiKey,
-//     });
-//     setAnalysis(analysisResponse.data);
+      // console.log('===== FINAL ANALYSIS REQUEST =====');
+      // console.log('resumeId:', currentResumeId);
+      // console.log(
+      //   'jobDescriptionId:',
+      //   currentJobDescriptionId
+      // );
+      // console.log('Provider:', provider);
+      // console.log('==================================');
 
-//     console.log(
-//       'Analysis completed:',
-//       analysisResponse.data
-//     );
-
-//   } catch (err) {
-//     console.error(
-//       'Resume analysis failed:',
-//       err
-//     );
-
-//     setError(
-//       err.message ||
-//         'Failed to analyze resume.'
-//     );
-//   } finally {
-//     setLoading(false);
-//   }
-// };
-
-const handleAnalyze = async () => {
-  if (!canAnalyze || loading) return;
-
-  setLoading(true);
-  setError('');
-
-  try {
-    let currentResumeId = resumeId;
-    let currentJobDescriptionId = jobDescriptionId;
-
-    // Upload resume only if it hasn't been processed yet
-    if (!currentResumeId) {
-      const resumeResult = await uploadResume(resume);
-
-      currentResumeId = resumeResult.data.resumeId;
-      setResumeId(currentResumeId);
-
-      console.log('Resume processed:', resumeResult.data);
-    }
-
-    // Process job description only if it hasn't been processed yet
-    if (!currentJobDescriptionId) {
-      const jobDescriptionResult = await createJobDescription({
-        jobDescription: jobDescription.trim(),
+      // Run AI analysis
+      const analysisResponse = await analyzeResume({
+        resumeId: currentResumeId,
+        jobDescriptionId: currentJobDescriptionId,
+        provider,
+        apiKey,
       });
 
-      currentJobDescriptionId =
-        jobDescriptionResult.data.jobDescriptionId;
+      setAnalysis(analysisResponse.data);
 
-      setJobDescriptionId(currentJobDescriptionId);
+      // console.log('Analysis completed:',analysisResponse.data);
 
-      console.log(
-        'Job description processed:',
-        jobDescriptionResult.data
+    } catch (err) {
+      console.error(
+        'Resume analysis failed:',
+        err
       );
-    }
 
-    console.log('===== FINAL ANALYSIS REQUEST =====');
-    console.log('resumeId:', currentResumeId);
-    console.log(
-      'jobDescriptionId:',
-      currentJobDescriptionId
-    );
-    console.log('Provider:', provider);
-    console.log('==================================');
-
-    // Run AI analysis
-    const analysisResponse = await analyzeResume({
-      resumeId: currentResumeId,
-      jobDescriptionId: currentJobDescriptionId,
-      provider,
-      apiKey,
-    });
-
-    setAnalysis(analysisResponse.data);
-
-    console.log(
-      'Analysis completed:',
-      analysisResponse.data
-    );
-
-  } catch (err) {
-    console.error(
-      'Resume analysis failed:',
-      err
-    );
-
-    setError(
-      err.message ||
+      setError(
+        err.message ||
         'Failed to analyze resume.'
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+  if (analysis) {
+    return (
+      <AnalysisResults
+        analysis={analysis}
+        onBack={() => setAnalysis(null)}
+      />
     );
-  } finally {
-    setLoading(false);
   }
-};
- if (analysis) {
-  return (
-    <AnalysisResults
-      analysis={analysis}
-      onBack={() => setAnalysis(null)}
-    />
-  );
-}
 
   return (
-    
+
     <main className="analyzer-page">
-      
+      {loading && <Loading />}
+
       <div className="analyzer-container">
 
         <button className="back-button" onClick={onBack}>
@@ -229,9 +152,9 @@ const handleAnalyze = async () => {
             <JobDescription
               value={jobDescription}
               onChange={(value) => {
-    setJobDescription(value);
-    setJobDescriptionId(null);
-  }}
+                setJobDescription(value);
+                setJobDescriptionId(null);
+              }}
             />
           </section>
 
@@ -247,18 +170,18 @@ const handleAnalyze = async () => {
           </div>
 
           <button
-            className="primary-btn analyze-btn"
-            disabled={!canAnalyze || loading}
-            onClick={handleAnalyze}
-          >
-            <Sparkles size={17} />
-            {loading ? 'Processing Resume...' : 'Analyze Resume'}
-          </button>
+  className="primary-btn analyze-btn"
+  disabled={!canAnalyze || loading}
+  onClick={handleAnalyze}
+>
+  <Sparkles size={17} />
+  {loading ? 'Analyzing Resume...' : 'Analyze Resume'}
+</button>
         </div>
 
         {error && (
           <div className="analysis-error">
-          {error}
+            {error}
           </div>
         )}
 

@@ -1,0 +1,128 @@
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(242, 239, 231, 0.94);
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.loading-content h2 {
+  margin: 18px 0 6px;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  color: #3368A0;
+}
+
+.loading-content p {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: #66A3BF;
+}
+
+
+/* CareerLens Loader */
+
+.loader {
+  position: relative;
+  width: 120px;
+  height: 90px;
+  margin: 0 auto;
+}
+
+
+
+.loader:after {
+  content: "";
+
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  height: 7px;
+  width: 45px;
+
+  border-radius: 4px;
+
+  box-shadow:
+    0 5px 0 #66A3BF,
+    -35px 50px 0 #C8DFDB,
+    -70px 95px 0 #C8DFDB;
+
+  animation: loading-step 1s ease-in-out infinite;
+}
+
+
+.loader:before {
+  content: "";
+
+  position: absolute;
+  bottom: 30px;
+  left: 53px;
+
+  height: 18px;
+  width: 18px;
+
+  border-radius: 50%;
+
+  background: #3368A0;
+
+  animation: loading-bounce 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes loading-bounce {
+  0% {
+    transform: scale(1, 0.7);
+  }
+
+  40% {
+    transform: scale(0.8, 1.2);
+  }
+
+  60% {
+    transform: scale(1, 1);
+  }
+
+  100% {
+    bottom: 105px;
+  }
+}
+
+
+@keyframes loading-step {
+  0% {
+    box-shadow:
+      0 10px 0 rgba(102, 163, 191, 0),
+      0 10px 0 #66A3BF,
+      -35px 50px 0 #C8DFDB,
+      -70px 90px 0 #C8DFDB;
+  }
+
+  100% {
+    box-shadow:
+      0 10px 0 #66A3BF,
+      -35px 50px 0 #C8DFDB,
+      -70px 90px 0 #C8DFDB,
+      -70px 90px 0 rgba(200, 223, 219, 0);
+  }
+}

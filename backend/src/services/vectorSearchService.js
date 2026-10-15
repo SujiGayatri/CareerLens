@@ -105,9 +105,9 @@ export const searchResumeChunks = async (
     );
   }
 
-  console.log("===== SEARCH RESUME CHUNKS =====");
-  console.log("resumeId:", resumeId);
-  console.log("queryEmbedding length:", queryEmbedding.length);
+  // console.log("===== SEARCH RESUME CHUNKS =====");
+  // console.log("resumeId:", resumeId);
+  // console.log("queryEmbedding length:", queryEmbedding.length);
 
   if (resumeId) {
     if (!mongoose.Types.ObjectId.isValid(resumeId)) {
@@ -121,32 +121,32 @@ export const searchResumeChunks = async (
   resumeId: resumeObjectId,
 });
 
-console.log("===== FILTER TEST =====");
-console.log("resumeObjectId:", resumeObjectId);
-console.log("Chunk found:", testChunk ? "YES" : "NO");
-console.log("=======================");
+// console.log("===== FILTER TEST =====");
+// console.log("resumeObjectId:", resumeObjectId);
+// console.log("Chunk found:", testChunk ? "YES" : "NO");
+// console.log("=======================");
 
     // TEST 1: Check whether chunks exist for this resume
     const matchingChunks = await ResumeChunk.find({
       resumeId: resumeObjectId,
     }).select("_id resumeId chunkIndex text");
 
-    console.log("===== RESUME CHUNK CHECK =====");
-    console.log(
-      "Expected resumeId:",
-      resumeObjectId.toString()
-    );
-    console.log(
-      "Matching chunks:",
-      matchingChunks.length
-    );
-    console.log(
-      "Chunk IDs:",
-      matchingChunks.map((chunk) =>
-        chunk._id.toString()
-      )
-    );
-    console.log("==============================");
+    // console.log("===== RESUME CHUNK CHECK =====");
+    // console.log(
+    //   "Expected resumeId:",
+    //   resumeObjectId.toString()
+    // );
+    // console.log(
+    //   "Matching chunks:",
+    //   matchingChunks.length
+    // );
+    // console.log(
+    //   "Chunk IDs:",
+    //   matchingChunks.map((chunk) =>
+    //     chunk._id.toString()
+    //   )
+    // );
+    // console.log("==============================");
 
     const pipeline = [
       {
@@ -183,9 +183,9 @@ console.log("=======================");
 for (let attempt = 1; attempt <= 3; attempt++) {
   results = await ResumeChunk.aggregate(pipeline);
 
-  console.log(
-    `Vector search attempt ${attempt}: ${results.length} results`
-  );
+  // console.log(
+  //   `Vector search attempt ${attempt}: ${results.length} results`
+  // );
 
   if (results.length > 0) {
     break;
@@ -196,18 +196,18 @@ for (let attempt = 1; attempt <= 3; attempt++) {
   }
 }
 
-    console.log("===== VECTOR SEARCH RESULT =====");
-    console.log("Results count:", results.length);
-    console.log(
-      "Results:",
-      results.map((result) => ({
-        id: result._id,
-        resumeId: result.resumeId,
-        chunkIndex: result.chunkIndex,
-        score: result.score,
-      }))
-    );
-    console.log("================================");
+    // console.log("===== VECTOR SEARCH RESULT =====");
+    // console.log("Results count:", results.length);
+    // console.log(
+    //   "Results:",
+    //   results.map((result) => ({
+    //     id: result._id,
+    //     resumeId: result.resumeId,
+    //     chunkIndex: result.chunkIndex,
+    //     score: result.score,
+    //   }))
+    // );
+    // console.log("================================");
 
     return results;
   }

@@ -32,9 +32,9 @@ const generateWithGroq = async ({
     ],
   });
 
-  console.log("===== GROQ COMPLETION =====");
-console.dir(completion, { depth: null });
-console.log("===========================");
+//   console.log("===== GROQ COMPLETION =====");
+// console.dir(completion, { depth: null });
+// console.log("===========================");
 
   const response = completion.choices[0]?.message?.content;
 
