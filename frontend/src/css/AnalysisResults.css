@@ -1,0 +1,697 @@
+  
+.results-page {
+  min-height: 100vh;
+  padding: 40px 24px 72px;
+}
+.results-container {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+}
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 0;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.65;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+.back-button:hover {
+  opacity: 1;
+  transform: translateX(-2px);
+}
+.results-header {
+  margin: 34px 0 28px;
+}
+.results-header .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: #e9f5f4;
+  font-size: 12px;
+  font-weight: 650;
+  margin-bottom: 14px;
+}
+.results-header h1 {
+  margin: 0;
+  font-size: clamp(34px, 5vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -1.8px;
+}
+.results-header p {
+  max-width: none;
+  white-space: nowrap;
+  margin: 14px 0 0;
+  font-size: 15px;
+  line-height: 1.65;
+  opacity: 0.62;
+}
+.score-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 40px;
+
+  padding: 28px 32px;
+
+  margin-bottom: 18px;
+
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.025);
+}
+
+.score-content {
+  max-width: 680px;
+}
+
+.score-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 13px;
+  font-weight: 650;
+
+  opacity: 0.58;
+}
+
+.score-number {
+  margin-top: 6px;
+
+  font-size: clamp(58px, 7vw, 76px);
+  font-weight: 750;
+
+  line-height: 0.98;
+  letter-spacing: -4px;
+}
+
+.score-content p {
+  max-width: 580px;
+
+  margin: 12px 0 0;
+
+  font-size: 14px;
+  line-height: 1.6;
+
+  opacity: 0.58;
+}
+
+/* =========================================================
+   Score Ring
+   ========================================================= */
+
+.score-circle {
+  flex-shrink: 0;
+}
+
+.score-progress {
+  position: relative;
+
+  width: 132px;
+  height: 132px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      #111 0deg,
+      #111 var(--score),
+      #e8e8e8 var(--score),
+      #e8e8e8 360deg
+    );
+}
+
+.score-progress::before {
+  content: "";
+
+  position: absolute;
+
+  width: 104px;
+  height: 104px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+}
+
+.score-progress span {
+  position: relative;
+  z-index: 1;
+
+  font-size: 23px;
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+}
+
+/* =========================================================
+   Generic Result Cards
+   ========================================================= */
+
+.result-card {
+  padding: 25px 27px;
+
+  margin-bottom: 18px;
+
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.result-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+
+  margin-bottom: 18px;
+}
+
+.result-icon {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 9px;
+
+  background: #f2f3f3;
+}
+
+.result-card-header h2 {
+  margin: 1px 0 0;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  letter-spacing: -0.2px;
+}
+
+.result-card-header p {
+  margin: 4px 0 0;
+
+  font-size: 12px;
+  line-height: 1.45;
+
+  opacity: 0.52;
+}
+
+/* =========================================================
+   Summary
+   ========================================================= */
+
+.summary-card {
+  padding-bottom: 23px;
+}
+
+.summary-text {
+  max-width: 900px;
+
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.75;
+
+  opacity: 0.72;
+}
+
+/* =========================================================
+   Skills
+   ========================================================= */
+
+.skills-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+
+  align-items: stretch;
+}
+
+.skills-grid .result-card {
+  margin-bottom: 0;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  gap: 8px;
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 7px 10px;
+
+  border-radius: 8px;
+
+  font-size: 12.5px;
+  line-height: 1.35;
+
+  border: 1px solid transparent;
+}
+
+.skill-tag.matched {
+  background: #edf7f0;
+  border-color: #dceee1;
+}
+
+.skill-tag.missing {
+  background: #fbf1f1;
+  border-color: #f2dddd;
+}
+
+.empty-state {
+  margin: 0;
+
+  font-size: 13px;
+
+  opacity: 0.5;
+}
+
+/* =========================================================
+   Recommendations
+   ========================================================= */
+
+.recommendations-card {
+  margin-top: 18px;
+}
+
+.recommendations-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+}
+
+.recommendation-item {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 11px 13px;
+
+  border-radius: 10px;
+
+  background: #f7f7f7;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.recommendation-item:hover {
+  background: #f3f3f3;
+  transform: translateX(2px);
+}
+
+.recommendation-number {
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #111;
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.recommendation-item p {
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.5;
+
+  opacity: 0.75;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .results-page {
+    padding: 28px 16px 55px;
+  }
+
+  .results-header {
+    margin-top: 28px;
+  }
+
+  .results-header h1 {
+    font-size: 36px;
+  }
+
+  .score-card {
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 24px;
+  }
+
+  .score-circle {
+    align-self: center;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-card {
+    padding: 22px;
+  }
+  .analysis-overview-grid {
+  grid-template-columns: 1fr;
+}
+
+.requirements-grid {
+  grid-template-columns: 1fr;
+}
+}
+
+@media (max-width: 480px) {
+  .results-header h1 {
+    font-size: 32px;
+  }
+
+  .score-number {
+    font-size: 60px;
+  }
+
+  .score-progress {
+    width: 120px;
+    height: 120px;
+  }
+
+  .score-progress::before {
+    width: 94px;
+    height: 94px;
+  }
+
+  .skill-tag {
+    font-size: 12px;
+  }
+
+  .recommendation-item {
+    align-items: flex-start;
+  }
+}
+
+/* =========================================================
+   Matched / Missing Skills — Consistent Alignment
+   ========================================================= */
+
+.skills-grid .result-card {
+  text-align: left;
+}
+
+.skills-grid .result-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 11px;
+  width: 100%;
+  text-align: left;
+}
+
+.skills-grid .result-card-header > div:last-child {
+  flex: 1;
+  text-align: left;
+}
+
+.skills-grid .result-card-header h2,
+.skills-grid .result-card-header p {
+  text-align: left;
+}
+
+.skills-grid .skills-list {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+/* =========================================
+   REQUIREMENTS
+========================================= */
+
+.requirements-card {
+  margin-top: 24px;
+}
+
+.requirements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.requirement-item {
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.requirement-item:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+/* Top row */
+
+.requirement-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.requirement-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #111827;
+}
+
+.requirement-title svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Status */
+
+.requirement-status {
+  flex-shrink: 0;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.requirement-status.matched {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.requirement-status.partially_matched {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.requirement-status.missing {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+/* Requirement status border */
+
+.requirement-item.matched {
+  border-left: 4px solid #22c55e;
+}
+
+.requirement-item.partially_matched {
+  border-left: 4px solid #f59e0b;
+}
+
+.requirement-item.missing {
+  border-left: 4px solid #ef4444;
+}
+
+/* Meta badges */
+
+.requirement-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.importance-badge,
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.importance-badge.required {
+  color: #7f1d1d;
+  background: #fee2e2;
+}
+
+.importance-badge.preferred {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.importance-badge.nice_to_have {
+  color: #374151;
+  background: #f3f4f6;
+}
+
+.category-badge {
+  color: #374151;
+  background: #f3f4f6;
+}
+
+/* Evidence */
+
+.requirement-evidence {
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid #f0f0f0;
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.requirement-evidence strong {
+  color: #374151;
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  .requirement-top {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .requirement-status {
+    align-self: flex-start;
+  }
+
+  .requirement-item {
+    padding: 15px;
+  }
+}
+
+/* =========================================================
+   Analysis Overview
+   Summary Left + Score Right
+   ========================================================= */
+
+.analysis-overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.85fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.analysis-overview-grid .result-card,
+.analysis-overview-grid .score-card {
+  margin-bottom: 0;
+  height: 100%;
+}
+
+
+/* =========================================================
+   Three Requirement Columns
+   ========================================================= */
+
+.requirements-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.requirement-column {
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+.requirement-column .skills-list {
+  align-items: flex-start;
+}
+
+
+/* Partial Match */
+
+.skill-tag.partial {
+  background: #fff8e7;
+  border-color: #f4dfaa;
+}
+
+
+/* Partial Match Icon */
+
+.partial-icon {
+  background: #fff7df;
+}
+
+
+/* Keep requirement columns equal */
+
+.requirements-grid .result-card {
+  height: 100%;
+}

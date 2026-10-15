@@ -1,0 +1,147 @@
+.resume-upload-section {
+  width: 100%;
+}
+
+.upload-box {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+  border: 1.5px dashed #9fb9c9;
+  border-radius: 17px;
+  background: #f8fafb;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.upload-box:hover {
+  border-color: #3368a0;
+  background: #f3f8fb;
+}
+
+.upload-box.has-file {
+  min-height: 150px;
+  cursor: default;
+}
+
+.upload-icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 15px;
+  border-radius: 16px;
+  background: #c8dfdb;
+  color: #3368a0;
+}
+
+.upload-box h3 {
+  margin: 0 0 7px;
+  color: #172334;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.upload-box p {
+  margin: 0 0 8px;
+  color: #697888;
+  font-size: 12px;
+}
+
+.upload-box > span {
+  color: #9aa5ae;
+  font-size: 10px;
+}
+
+.selected-file {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  text-align: left;
+}
+
+.file-icon {
+  display: grid;
+  place-items: center;
+  min-width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: #c8dfdb;
+  color: #3368a0;
+}
+
+.file-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.file-info strong,
+.file-info span {
+  display: block;
+}
+
+.file-info strong {
+  overflow: hidden;
+  color: #263548;
+  font-size: 13px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-info span {
+  margin-top: 4px;
+  color: #8995a1;
+  font-size: 11px;
+}
+
+.remove-file {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 9px;
+  background: #f1f4f6;
+  color: #667585;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.remove-file:hover {
+  background: #e9edef;
+}
+
+.upload-box.has-error {
+  border-color: #c56b6b;
+  background: #fffafa;
+}
+
+.upload-box.has-error:hover {
+  border-color: #b85c5c;
+  background: #fff7f7;
+}
+
+.upload-error {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-top: 9px;
+
+  color: #b85c5c;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.upload-error svg {
+  flex-shrink: 0;
+}
